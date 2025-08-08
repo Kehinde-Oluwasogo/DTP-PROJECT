@@ -1,3 +1,389 @@
+/* Chatbot floating action button */
+.chatbot-fab {
+  position: fixed;
+  right:90px;
+  bottom: 92px;
+  z-index: 1000;
+  background: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(76, 79, 254, 0.15);
+  border-radius: 50%;
+  padding: 0;
+  transition: box-shadow 0.2s;
+  width: 100px;
+  height: 100px;
+}
+.chatbot-fab:hover {
+  /* box-shadow: 0 8px 32px rgba(76, 79, 254, 0.25); */
+  background: #4b51a2;
+}
+
+.t-le{
+  position: fixed;
+  right:96px;
+  bottom: 28px;
+  z-index: 1000;
+  color: #ffffff;
+}
+.t-le2{
+  position: fixed;
+  right:76px;
+  bottom: 28px;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+/* Chatbot popup */
+.chatbot-popup {
+  position: fixed;
+  right: 32px;
+  bottom: 90px;
+  width: 340px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(76, 79, 254, 0.18);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chatbot-popin 0.2s;
+}
+@keyframes chatbot-popin {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+.chatbot-header {
+  background: linear-gradient(90deg, #764ba2 0%, #4facfe 100%);
+  color: #fff;
+  padding: 12px 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chatbot-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.chatbot-messages {
+  flex: 1;
+  padding: 16px;
+  background: #f7f7fb;
+  overflow-y: auto;
+  max-height: 220px;
+}
+.chatbot-msg {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-break: break-word;
+  font-size: 0.98rem;
+}
+.chatbot-msg-bot {
+  background: #e0e7ff;
+  color: #333;
+  align-self: flex-start;
+}
+.chatbot-msg-user {
+  background: #764ba2;
+  color: #fff;
+  align-self: flex-end;
+}
+.chatbot-input-row {
+  display: flex;
+  border-top: 1px solid #eee;
+  padding: 8px 12px;
+  background: #fff;
+}
+.chatbot-input-row input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f3f3fa;
+  margin-right: 8px;
+}
+.chatbot-input-row button {
+  background: #764ba2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chatbot-input-row button:hover {
+  background: #4facfe;
+}
+
+/* Course Detail Page Styles */
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 4rem);
+}
+
+.course-detail-page {
+  padding: 2rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #764ba2;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #4facfe;
+}
+
+.back-arrow {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.course-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.course-icon-large {
+  font-size: 4rem;
+  background: linear-gradient(135deg, #764ba2 0%, #4facfe 100%);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(118, 75, 162, 0.2);
+}
+
+.course-title-group {
+  flex: 1;
+}
+
+.course-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.course-description {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.key-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.1) 0%, rgba(79, 172, 254, 0.1) 100%);
+  border-radius: 15px;
+}
+
+.key-info-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.key-info-item h3 {
+  color: #333;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.key-info-item p {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.course-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.content-section {
+  margin-bottom: 2.5rem;
+}
+
+.content-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(118, 75, 162, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.course-details-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.course-highlights {
+  list-style: none;
+  padding: 0;
+}
+
+.course-highlights li {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.highlight-icon {
+  color: #4facfe;
+  font-weight: bold;
+}
+
+.course-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+.career-paths-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.career-list {
+  list-style: none;
+  padding: 0;
+}
+
+.career-list li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.career-list li:last-child {
+  border-bottom: none;
+}
+
+.career-icon {
+  font-size: 1.2rem;
+}
+
+.application-card {
+  background: linear-gradient(135deg, #764ba2 0%, #4facfe 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.application-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.application-card p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.apply-btn {
+  background: white;
+  color: #764ba2;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  margin: 1rem 0;
+  transition: transform 0.2s;
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.application-info {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.application-info p {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .course-content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .course-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .course-icon-large {
+    margin: 0 auto;
+  }
+  
+  .key-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

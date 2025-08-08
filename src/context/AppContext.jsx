@@ -12,7 +12,8 @@ export const useAppContext = () => {
 
 export const AppProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [currentView, setCurrentView] = useState('homepage'); // 'homepage' | 'dashboard'
+  const [currentView, setCurrentView] = useState('homepage'); // 'homepage' | 'dashboard' | 'courseDetail'
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [users, setUsers] = useState([
     {
       id: '1',
@@ -199,6 +200,8 @@ export const AppProvider = ({ children }) => {
     currentUser,
     currentView,
     setCurrentView,
+    selectedCourseId,
+    setSelectedCourseId,
     users,
     userProgress,
     podcasts,

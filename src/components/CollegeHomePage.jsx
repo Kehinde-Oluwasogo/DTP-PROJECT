@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useAppContext } from '../context/AppContext';
 
 const CollegeHomePage = () => {
-  const { setCurrentView } = useAppContext();
+  const { setCurrentView, setSelectedCourseId } = useAppContext();
   const [showLoginDropdown, setShowLoginDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -30,6 +31,42 @@ const CollegeHomePage = () => {
     // Store the selected role in sessionStorage for the AuthForm to use
     sessionStorage.setItem('selectedRole', role);
   };
+
+  const handleCourseClick = (courseId) => {
+    setSelectedCourseId(courseId);
+    setCurrentView('courseDetail');
+  };
+
+  // Chatbot demo state
+  const [chatOpen, setChatOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { from: 'bot', text: 'Hi! I am your T-levels info bot. Ask me anything about T-levels!' }
+  ]);
+  const [input, setInput] = useState('');
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    if (chatOpen && chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, chatOpen]);
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    setMessages((msgs) => [
+      ...msgs,
+      { from: 'user', text: input }
+    ]);
+    setTimeout(() => {
+      setMessages((msgs) => [
+        ...msgs,
+        { from: 'bot', text: 'T-levels are 2-year courses designed for 16-19 year olds, combining classroom learning with industry placements. They are equivalent to 3 A-levels and focus on technical skills for specific careers. Want to know more?' }
+      ]);
+    }, 600);
+    setInput('');
+  };
+
   return (
     <div className="college-homepage">
       {/* Navigation Header */}
@@ -50,14 +87,14 @@ const CollegeHomePage = () => {
               </button>
               {showLoginDropdown && (
                 <div className="dropdown-menu">
-                  <button 
-                    className="dropdown-item" 
+                  <button
+                    className="dropdown-item"
                     onClick={() => handleRoleSelect('student')}
                   >
                     Student Login
                   </button>
-                  <button 
-                    className="dropdown-item" 
+                  <button
+                    className="dropdown-item"
                     onClick={() => handleRoleSelect('admin')}
                   >
                     Admin Login
@@ -77,8 +114,8 @@ const CollegeHomePage = () => {
               Shape Your Future with <span className="highlight">Digital Skills</span>
             </h1>
             <p className="hero-subtitle">
-              Join Ada National College and unlock your potential in the digital world. 
-              Our industry-focused T-levels and degree apprenticeships prepare you for 
+              Join Ada National College and unlock your potential in the digital world.
+              Our industry-focused T-levels and degree apprenticeships prepare you for
               the careers of tomorrow.
             </p>
             <div className="hero-buttons">
@@ -142,9 +179,9 @@ const CollegeHomePage = () => {
                 <li>UI/UX design principles</li>
                 <li>Industry placement guaranteed</li>
               </ul>
-              <button className="course-btn" onClick={() => handleRoleSelect('student')}>Learn More</button>
+              <button className="course-btn" onClick={() => handleCourseClick('digital')}>Learn More</button>
             </div>
-            
+
             <div className="course-item">
               <div className="course-icon">🔬</div>
               <h3>Health & Science</h3>
@@ -155,9 +192,9 @@ const CollegeHomePage = () => {
                 <li>Research methodologies</li>
                 <li>NHS placement opportunities</li>
               </ul>
-              <button className="course-btn" onClick={() => handleRoleSelect('student')}>Learn More</button>
+              <button className="course-btn" onClick={() => handleCourseClick('health')}>Learn More</button>
             </div>
-            
+
             <div className="course-item">
               <div className="course-icon">⚙️</div>
               <h3>Engineering & Manufacturing</h3>
@@ -168,7 +205,7 @@ const CollegeHomePage = () => {
                 <li>Sustainable engineering</li>
                 <li>Industry 4.0 technologies</li>
               </ul>
-              <button className="course-btn" onClick={() => handleRoleSelect('student')}>Learn More</button>
+              <button className="course-btn" onClick={() => handleCourseClick('engineering')}>Learn More</button>
             </div>
           </div>
         </div>
@@ -216,7 +253,7 @@ const CollegeHomePage = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="testimonial-item">
               <div className="testimonial-content">
                 <p>"The support from tutors was incredible. They helped me discover my passion for healthcare technology, and now I'm studying Medicine at Cambridge!"</p>
@@ -230,7 +267,7 @@ const CollegeHomePage = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="testimonial-item">
               <div className="testimonial-content">
                 <p>"The hands-on experience with real engineering projects was amazing. I learned more in 2 years than I thought possible!"</p>
@@ -300,6 +337,53 @@ const CollegeHomePage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Chatbot Portal: ensures fixed to viewport, not container */}
+      {createPortal(
+        <>
+          <button
+            className="chatbot-fab"
+            aria-label="Open chat bot"
+            onClick={() => setChatOpen((open) => !open)}
+          >
+            <svg width="60" height="60" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="16" fill="#4b51a2" />
+              <path d="M8 11C8 9.89543 8.89543 9 10 9H22C23.1046 9 24 9.89543 24 11V17C24 18.1046 23.1046 19 22 19H14L10 22V19H10C8.89543 19 8 18.1046 8 17V11Z"
+                fill="#fff" />
+              <circle cx="12" cy="14" r="1" fill="#4b51a2" />
+              <circle cx="16" cy="14" r="1" fill="#4b51a2" />
+              <circle cx="20" cy="14" r="1" fill="#4b51a2" />
+            </svg>
+
+          </button>
+          <p className="t-le"> T-level Chat</p>
+          {chatOpen && (
+            <div className="chatbot-popup">
+              <div className="chatbot-header">
+                <span>T-levels Info Bot</span>
+                <button className="chatbot-close" onClick={() => setChatOpen(false)}>&times;</button>
+              </div>
+              <div className="chatbot-messages">
+                {messages.map((msg, i) => (
+                  <div key={i} className={`chatbot-msg chatbot-msg-${msg.from}`}>{msg.text}</div>
+                ))}
+                <div ref={chatEndRef} />
+              </div>
+              <form className="chatbot-input-row" onSubmit={handleSend}>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={e => setInput(e.target.value)}
+                  placeholder="Ask about T-levels..."
+                  autoFocus
+                />
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          )}
+        </>,
+        document.body
+      )}
     </div>
   );
 };
